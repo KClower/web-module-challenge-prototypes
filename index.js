@@ -20,14 +20,11 @@ this.name = name;
 this.age = age;
 this.stomach = []
 }
-
-
 Person.prototype.eat = function(edible){
   if(this.stomach.length < 10){
     this.stomach.push(edible);
   }
 }
-
 Person.prototype.poop = function(){
   this.stomach = [];
 }
@@ -73,14 +70,12 @@ console.log(personThree.stomach);
 function Car(model, milesPerGallon,) {
 this.model = model;
 this.milesPerGallon = milesPerGallon;
-this.tank = []
-this.odometer = []
+this.tank = 0
+this.odometer = 0
 }
 
 Car.prototype.fill = function(gallons){
-  if(this.tank.length < 20){
-    this.tank.push(gallons);
-  }
+ this.tank = this.tank + gallons
 }
 
 /*
@@ -91,22 +86,27 @@ Car.prototype.fill = function(gallons){
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby(attributes) {
+function Baby(name, age, favoriteToy) {
   
-    Person.call(this, attributes);
-    this.favoriteToy = attributes.favoriteToy; 
+    Person.call(this, name, age);
+    this.favoriteToy = favoriteToy; 
   }
   Baby.prototype = Object.create(Person.prototype); 
 
   Baby.prototype.play = function(){
-    console.log(`Playing with ${this.favoriteToy}`);
+    return `Playing with ${this.favoriteToy}`;
   }
 
-
+const baby = new Baby("Kyle", 2, "trains")
  
+
+
+ console.log(baby)
+ console.log(baby.play())
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
+
   1. The value of this is determined by the execution context of the code. This means that the value of this can change depending on where the code is being executed.
 
   2. In an object method, this refers to the object itself. This allows you to access the object's properties and methods from within the method.
