@@ -15,11 +15,45 @@
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+this.name = name;
+this.age = age;
+this.stomach = []
 }
 
 
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const personOne = new Person("Kevin", 42);
+const personTwo = new Person("Lee", 43);
+const personThree = new Person("Oscar", 57);
+
+
+console.log(personOne.toString());
+console.log(personTwo.toString());
+console.log(personThree.toString());
+
+personThree.eat("tacos")
+personThree.eat("pizza")
+personThree.eat("ramen")
+
+console.log(personThree.stomach);
+
+personThree.poop();
+
+console.log(personThree.stomach);
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -36,10 +70,18 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon,) {
+this.model = model;
+this.milesPerGallon = milesPerGallon;
+this.tank = []
+this.odometer = []
 }
 
+Car.prototype.fill = function(gallons){
+  if(this.tank.length < 20){
+    this.tank.push(gallons);
+  }
+}
 
 /*
   TASK 3
@@ -49,18 +91,29 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(attributes) {
+  
+    Person.call(this, attributes);
+    this.favoriteToy = attributes.favoriteToy; 
+  }
+  Baby.prototype = Object.create(Person.prototype); 
 
-}
+  Baby.prototype.play = function(){
+    console.log(`Playing with ${this.favoriteToy}`);
+  }
 
 
+ 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. The value of this is determined by the execution context of the code. This means that the value of this can change depending on where the code is being executed.
+
+  2. In an object method, this refers to the object itself. This allows you to access the object's properties and methods from within the method.
+
+  3. In a function, this refers to the global object. This means that you can access global variables and functions from within the function.
+
+  4. In strict mode, this is undefined in a function. This means that you must explicitly bind the this keyword to an object before using it in a function.
 */
 
 ///////// END OF CHALLENGE /////////
